@@ -61,12 +61,7 @@ describe('Visual monitor testing', function() {
             '.hom_col .ttm_image',
             '.hom_col .ttm_text',
           ],
-        hide:
-          [
-            // Sidebar.
-            '.hom_col .hom_skills',
-          ],
-        screenWidth: selectedCaps == 'chrome' ? [1200] : undefined,
+        screenWidth: selectedCaps == 'chrome' ? [960] : undefined,
       }, resultsCallback)
       .call(done);
   });
