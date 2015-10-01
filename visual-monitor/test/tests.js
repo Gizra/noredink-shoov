@@ -21,17 +21,6 @@ var capsConfig = {
     'os' : 'Windows',
     'os_version' : '7',
     'resolution' : '1024x768'
-  },
-  'iphone5': {
-    'browser' : 'Chrome',
-    'browser_version' : '42.0',
-    'os' : 'OS X',
-    'os_version' : 'Yosemite',
-    'chromeOptions': {
-      'mobileEmulation': {
-        'deviceName': 'Apple iPhone 5'
-      }
-    }
   }
 };
 
@@ -61,12 +50,23 @@ describe('Visual monitor testing', function() {
   it('should show the home page',function(done) {
     client
       .url(baseUrl)
+      .execute(function() {
+        jQuery('body').css('background', 'none');
+      })
       .webdrivercss(testName + '.homepage', {
         name: '1',
-        exclude: [],
-        remove: [],
-        hide: [],
-        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+        exclude:
+          [
+            // Teachers and students.
+            '.hom_col .ttm_image',
+            '.hom_col .ttm_text',
+          ],
+        hide:
+          [
+            // Sidebar.
+            '.hom_col .hom_skills',
+          ],
+        screenWidth: selectedCaps == 'chrome' ? [1200] : undefined,
       }, resultsCallback)
       .call(done);
   });
